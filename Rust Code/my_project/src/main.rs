@@ -9,7 +9,7 @@ fn main() {
     // Define the URL to download from
     let url = "https://www.flipkart.com/search?q=mobiles&as=on&as-show=on&otracker=AS_Query_TrendingAutoSuggest_1_0_na_na_na&otracker1=AS_Query_TrendingAutoSuggest_1_0_na_na_na&as-pos=1&as-type=TRENDING&suggestionId=mobiles&requestId=f53bfed8-6878-4a9a-9405-1bd406e2f3a6";
     // Define the file name to store the HTML code
-    let file_name = "flipkart.html";
+    let file_name = "kit.html";
     // Call the download function with the URL and file name as arguments
     download(url, file_name).expect("Download failed");
 }
