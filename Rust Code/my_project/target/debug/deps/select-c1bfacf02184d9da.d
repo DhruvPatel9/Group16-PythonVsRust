@@ -1,0 +1,11 @@
+C:\Users\Kislay\Documents\GitHub\Group16-PythonVsRust\Rust Code\my_project\target\debug\deps\select-c1bfacf02184d9da.rmeta: C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\lib.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\document.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\node.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\predicate.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\selection.rs
+
+C:\Users\Kislay\Documents\GitHub\Group16-PythonVsRust\Rust Code\my_project\target\debug\deps\libselect-c1bfacf02184d9da.rlib: C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\lib.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\document.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\node.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\predicate.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\selection.rs
+
+C:\Users\Kislay\Documents\GitHub\Group16-PythonVsRust\Rust Code\my_project\target\debug\deps\select-c1bfacf02184d9da.d: C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\lib.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\document.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\node.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\predicate.rs C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\selection.rs
+
+C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\lib.rs:
+C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\document.rs:
+C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\node.rs:
+C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\predicate.rs:
+C:\Users\Kislay\.cargo\registry\src\index.crates.io-6f17d22bba15001f\select-0.6.0\src\selection.rs:
