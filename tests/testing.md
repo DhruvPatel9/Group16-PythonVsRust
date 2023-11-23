@@ -30,4 +30,4 @@ then follow respecting compiling steps as follows:
      ```
    - This assumes that your Rust project is set up with Cargo, and the necessary dependencies are installed.
 
-**Note:** Ensure that you have the required dependencies for both Python and Rust installed on your system. If you encounter any errors or issues, please provide more details, and I'll be happy to help you troubleshoot. Additionally, make sure you have the necessary libraries or crates installed for web scraping in both Python and Rust.
+**Note:** Ensure that you have the required dependencies for both Python and Rust installed on your systemb and the necessary libraries or crates installed for web scraping in both Python and Rust.
