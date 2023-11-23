@@ -1,2 +1,2 @@
-my_function execution time: 751018.76 microseconds
-another_function execution time: 177565.57 microseconds
+download_html execution time: 781120.78 microseconds
+scrap_data execution time: 176819.80 microseconds

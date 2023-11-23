@@ -109,8 +109,8 @@ if __name__ == "__main__":
     #profiler.print_stats()
 
     with open('time_results.txt', 'w') as f:
-        f.write(f"my_function execution time: {download_html_time:.2f} microseconds\n")
-        f.write(f"another_function execution time: {scrap_data_time:.2f} microseconds\n")
+        f.write(f"download_html execution time: {download_html_time:.2f} microseconds\n")
+        f.write(f"scrap_data execution time: {scrap_data_time:.2f} microseconds\n")
 
 
     while True:
