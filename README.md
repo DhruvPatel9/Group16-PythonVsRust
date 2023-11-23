@@ -88,5 +88,15 @@ Python's active community and rich library ecosystem simplify the implementation
 * Interpreted Language:
 Python's interpreted nature allows for quick testing and debugging, streamlining the iterative development process in web scraping.
 
-	
+## Output Comparison
+### Rust is faster compared to Python, but takes up more memory
+Analysis was done by creating a massif file and generating a report from it.<br>
+We used massif since it is used for  detailed heap profiling and is also platform independant, hence can be shared and used by anybody to generate a report.<br>
+### The following results were obtained for Rust:
 
+![image](https://github.com/DhruvPatel9/Group16-PythonVsRust/assets/101914758/3dc759e3-cc72-4d61-adb6-474ce238cdaf)
+
+
+### The following results were obtained for Python:
+
+![image](https://github.com/DhruvPatel9/Group16-PythonVsRust/assets/101914758/f60584ae-ac6e-402b-96bc-45bc8968c853)
