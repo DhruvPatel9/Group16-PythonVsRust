@@ -1,6 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import cProfile
+import pstats
+import timeit
+import time
+
+
+from memory_profiler import profile
+
+
+@profile
 
 def download_html(url):
     response = requests.get(url)
@@ -10,6 +20,8 @@ def download_html(url):
         print(f"Failed to download the HTML. Status code: {response.status_code}")
         return None
 
+
+@profile
 def scrape_data(html):
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -22,6 +34,7 @@ def scrape_data(html):
 
     return data
 
+@profile
 def save_to_csv(data, filename):
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['Quote', 'Author', 'Favorite']
@@ -31,9 +44,12 @@ def save_to_csv(data, filename):
         for entry in data:
             writer.writerow({'Quote': entry['quote'], 'Author': entry['author'], 'Favorite': entry['favorite']})
 
+
+@profile
 def search_quotes_by_author(quotes, author):
     return list(filter(lambda quote: quote['author'] == author, quotes))
 
+@profile
 def mark_as_favorite(quotes, quote_index):
     if 0 <= quote_index < len(quotes):
         quotes[quote_index]['favorite'] = True
@@ -41,10 +57,13 @@ def mark_as_favorite(quotes, quote_index):
     else:
         print("Invalid quote index.")
 
+@profile
 def save_favorites_to_csv(quotes, filename):
     favorites = [quote for quote in quotes if quote['favorite']]
     save_to_csv(favorites, filename)
 
+
+@profile
 def display_favorite_quotes(quotes):
     favorites = [quote['quote'] for quote in quotes if quote['favorite']]
     if favorites:
@@ -58,17 +77,43 @@ if __name__ == "__main__":
     # URL of the webpage containing quotes
     url = "http://quotes.toscrape.com"
 
+    profiler = cProfile.Profile()
+
+    # Enable profiling
+    profiler.enable()
+
+    
+    
+    start_time = time.time()
+   
     # Download HTML
     html_content = download_html(url)
+    end_time = time.time()
+    download_html_time = (end_time - start_time) * 1e6  # Convert to microseconds
 
     if html_content:
+        start_time = time.time()
         # Scrape data
         scraped_data = scrape_data(html_content)
-
+        end_time = time.time()
+        scrap_data_time = (end_time - start_time) * 1e6  # Convert to microseconds
         # Save to CSV
         save_to_csv(scraped_data, 'quotes.csv')
+    
+    # Disable profiling
+    profiler.disable()
 
-        while True:
+    # Print the profiling results
+    #  Un-comment this Line to get the profiling results
+    # Stored in time_profiling.txt
+    #profiler.print_stats()
+
+    with open('time_results.txt', 'w') as f:
+        f.write(f"my_function execution time: {download_html_time:.2f} microseconds\n")
+        f.write(f"another_function execution time: {scrap_data_time:.2f} microseconds\n")
+
+
+    while True:
             print("\nOptions:")
             print("1. Search for quotes by author")
             print("2. Mark a quote as favorite")

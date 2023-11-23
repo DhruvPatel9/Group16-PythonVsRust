@@ -1,0 +1,2 @@
+my_function execution time: 751018.76 microseconds
+another_function execution time: 177565.57 microseconds
