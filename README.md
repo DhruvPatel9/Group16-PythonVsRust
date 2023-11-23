@@ -32,10 +32,8 @@ Testing appears to be primarily manual. The code does not explicitly include aut
 ### Database:
 The code does not involve a traditional database. Instead, it uses CSV files to persist scraped data and favorite quotes.
 
-## Comparison of Python's ease of use for Web Scraping with Rust's safety and performance 
-
 ## Web scrapping: 
- Web scraping is the process of automating data extraction from websites, utilizing bots or scripts to navigate and retrieve information. It enables the collection of text, images, links, and more by sending HTTP requests and parsing HTML.
+Web scraping is a data extraction technique employed to gather information from websites by simulating the behavior of a web browser. This process involves programmatically accessing and parsing the HTML structure of web pages, extracting specific data points or content, and transforming it into a structured format for analysis or storage. Web scraping is commonly used for various purposes, including gathering real-time data for research, monitoring prices on e-commerce sites, tracking changes in online content, and aggregating information from multiple sources. While it can provide valuable insights and automate data collection, web scraping must be conducted ethically and in compliance with legal and ethical standards. It is essential for practitioners to be mindful of website terms of service, adhere to robots.txt guidelines, and respect intellectual property rights, ensuring responsible and respectful use of the web as a data source.
  
  ##  TASK done till Milestone 1:
 We wrote Python code for downloading HTML Script and then in the same file, we added code for Web Scrapping it 
