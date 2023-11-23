@@ -12,6 +12,26 @@ The objective of this project is to conduct a comparative analysis of Web Scrapi
 
 ## POPL Ascepts Involved
 During the course of web scraping, this project delves into the POPL (Programming Languages Principles) aspects, the project aims to uncover insights into the interplay of functional programming paradigms, memory safety features, ownership models, and regular expression capabilities in both Python and Rust, while concurrently assessing their impact on performance during web data extraction.
+
+## Software Architecture
+### Components:
+Web Scraper: Responsible for downloading HTML content, parsing it using BeautifulSoup, and extracting relevant data.
+CSV Handler: Manages the writing of data to CSV files.
+User Interface/Interaction: The while loop that continuously prompts the user for input and executes actions based on the user's choice.	
+
+### Reuse and Development:
+Reuse: The code leverages existing libraries such as requests for HTTP requests and BeautifulSoup for HTML parsing. These are reusable components developed by others.
+Development: The application-specific logic, including the structure of the main loop, user interaction, and handling of scraped data, is developed for this specific application.
+
+### Client-Server Architecture:
+The provided code does not exhibit a client-server architecture. It's a standalone command-line application where the user interacts with the application locally.
+
+### Testing Component:
+Testing appears to be primarily manual. The code does not explicitly include automated testing components or frameworks. Testing is likely performed by running the application and interacting with it through the command line.
+
+### Database:
+The code does not involve a traditional database. Instead, it uses CSV files to persist scraped data and favorite quotes.
+
 ## Comparison of Python's ease of use for Web Scraping with Rust's safety and performance 
 
 ## Web scrapping: 
