@@ -1,7 +1,7 @@
 use regex::Regex;
 use std::error::Error;
 use std::fs::File;
-use std::io::{self, Write};
+use std::io::{self, Write, BufRead};
 use reqwest::blocking::get;
 use csv::Writer;
 
@@ -25,26 +25,32 @@ fn download_html(url: &str) -> Result<String, Box<dyn Error>> {
 }
 
 fn scrape_data(html: &str) -> Vec<Quote> {
-    // Define regular expressions to match patterns in HTML
-    let quote_regex = Regex::new(r#"<span class="text">(.*?)</span>"#).unwrap();
-    let author_regex = Regex::new(r#"<small class="author">(.*?)</small>"#).unwrap();
+    // Simplified regex patterns
+    let quote_regex = Regex::new(r#"<span class="text" itemprop="text">(.+?)</span>"#).unwrap();
+    let author_regex = Regex::new(r#"<small class="author" itemprop="author">(.+?)</small>"#).unwrap();
 
     // Use regular expressions to extract data
     let mut quotes = Vec::new();
+    let mut i=1;
     for (quote_match, author_match) in quote_regex.captures_iter(html).zip(author_regex.captures_iter(html)) {
+        // Print the entire match for debugging
+        //println!("Quote Match: {:?}", quote_match.get(0).map(|m| m.as_str()));
+        //println!("Author Match: {:?}", author_match.get(0).map(|m| m.as_str()));
+
         let text = quote_match.get(1).map_or("", |m| m.as_str()).trim().to_string();
         let author = author_match.get(1).map_or("", |m| m.as_str()).trim().to_string();
 
+        // Print extracted quote and author for debugging
+        println!("{}. Quote: {:?}, Author: {:?}", i , text, author);
+        i=i+1;
         quotes.push(Quote {
-            text,
-            author,
+            text: text.clone(),
+            author: author.clone(),
             favorite: false,
         });
     }
-
     quotes
 }
-
 
 
 
@@ -53,136 +59,104 @@ fn search_quotes_by_author<'a>(quotes: &'a [Quote], author: &str) -> Vec<&'a Quo
     quotes.iter().filter(|quote| quote.author == author).collect()
 }
 
-fn mark_as_favorite(quotes: &mut [Quote], quote_index: usize) {
+fn mark_as_favorite(quotes: &mut [Quote], quote_index: usize) -> Result<(), Box<dyn Error>> {
     if let Some(quote) = quotes.get_mut(quote_index) {
         quote.favorite = true;
         println!("Quote marked as favorite.");
+        // Save favorite quotes to CSV file
+        let favorite_quotes: Vec<Quote> = quotes.iter().filter(|quote| quote.favorite).cloned().collect();
+        save_to_csv(favorite_quotes, "favorites.csv")?;
+        println!("Favorite quotes saved to favorites.csv");
+        Ok(())
     } else {
-        println!("Invalid quote index.");
+        Err("Invalid quote index".into())
     }
 }
 
 fn save_to_csv(quotes: Vec<Quote>, filename: &str) -> Result<(), Box<dyn Error>> {
     let mut writer = Writer::from_path(filename)?;
-
     writer.write_record(&["Quote", "Author", "Favorite"])?;
-
     for quote in quotes {
-        writer.write_record(&[
-            &quote.text,
-            &quote.author,
-            &quote.favorite.to_string(),
-        ])?;
+        writer.write_record(&[quote.text, quote.author, quote.favorite.to_string()])?;
     }
-
-    writer.flush()?; // Flush the writer to ensure all records are written
-    writer.into_inner()?; // Close the writer to release the file handle
+    writer.flush()?;
     Ok(())
 }
 
-fn save_favorites_to_csv(quotes: Vec<Quote>, filename: &str) -> Result<(), Box<dyn Error>> {
-    let favorites: Vec<_> = quotes.iter().filter(|quote| quote.favorite).cloned().collect();
-    save_to_csv(favorites, filename)
-}
-
-
-
-
-
-
-
-fn display_favorite_quotes(quotes: &[Quote]) {
-    let favorites: Vec<_> = quotes.iter().filter(|quote| quote.favorite).collect();
-    if !favorites.is_empty() {
-        println!("Favorite Quotes:");
-        favorites.iter().enumerate().for_each(|(i, quote)| {
-            println!("{}. {}", i + 1, quote.text);
-        });
-    } else {
-        println!("No favorite quotes.");
-    }
-}
-
 fn main() -> Result<(), Box<dyn Error>> {
-    // URL of the webpage containing quotes
-    let url = "http://quotes.toscrape.com";
+    // Download HTML from the website
+    let url = "https://quotes.toscrape.com/";
+    let html = download_html(url)?;
+    println!("HTML downloaded and saved to temp.html");
 
-    // Download HTML and save to temp.html
-    let html_content = download_html(url)?;
+    // Scrape data from the HTML
+    let mut quotes = scrape_data(&html);
+    println!("Data scraped and stored in memory");
 
-    // Scrape data
-    let mut scraped_data = scrape_data(&html_content);
+    // Save quotes to CSV file
+    save_to_csv(quotes.clone(), "quotes.csv")?;
+    println!("Quotes saved to quotes.csv");
 
-    // Save to CSV (all quotes)
-    save_to_csv(scraped_data.clone(), "quotes.csv")?;
-
+    // Ask the user for input
     loop {
-        println!("\nOptions:");
-        println!("1. Search for quotes by author");
+        println!("What do you want to do with the scraped data?");
+        println!("1. Search quotes by author");
         println!("2. Mark a quote as favorite");
-        println!("3. Display favorite quotes");
-        println!("4. End program");
-
-        let mut option = String::new();
-        io::stdin().read_line(&mut option)?;
-        let option = option.trim();
-
+        println!("3. View favorite quotes");
+        println!("4. Exit the program");
+        let mut input = String::new();
+        io::stdin().lock().read_line(&mut input)?;
+        let option = input.trim().parse::<u32>()?;
         match option {
-            "1" => {
-                // Search for quotes by author
-                println!("Enter the author's name: ");
-                let mut author_to_search = String::new();
-                io::stdin().read_line(&mut author_to_search)?;
-                let author_to_search = author_to_search.trim();
+            1 => {
+                println!("Enter the name of an author to see their quotes:");
+                let mut input = String::new();
+                io::stdin().lock().read_line(&mut input)?;
+                let author = input.trim();
 
-                let results = search_quotes_by_author(&scraped_data, author_to_search);
-                if !results.is_empty() {
-                    println!("Quotes by {}: ", author_to_search);
-                    results.iter().enumerate().for_each(|(i, quote)| {
-                        println!("{}. \"{}\"", i + 1, quote.text);
-                    });
+                // Search quotes by author
+                let author_quotes = search_quotes_by_author(&quotes, author);
+                if author_quotes.is_empty() {
+                    println!("No quotes found by {}", author);
                 } else {
-                    println!("No quotes found for {}", author_to_search);
+                    println!("Quotes by {}:", author);
+                    for (i, quote) in author_quotes.iter().enumerate() {
+                        println!("{}. {}", i + 1, quote.text);
+                    }
                 }
             }
-            "2" => {
-                // Mark a quote as a favorite
-                println!("All Quotes:");
-                scraped_data.iter().enumerate().for_each(|(i, quote)| {
-                    println!("{}. \"{}\"", i + 1, quote.text);
-                });
+            2 => {
+                println!("Enter the index of a quote to mark it as favorite:");
+                let mut input = String::new();
+                io::stdin().lock().read_line(&mut input)?;
+                let quote_index = input.trim().parse::<usize>()?;
 
-                println!("Enter the index of the quote to mark as favorite (0 to exit): ");
-                let mut favorite_index = String::new();
-                io::stdin().read_line(&mut favorite_index)?;
-                let favorite_index: usize = match favorite_index.trim().parse() {
-                    Ok(index) => index,
-                    Err(_) => continue,
-                };
-
-                if favorite_index == 0 {
-                    break;
+                // Mark a quote as favorite
+                mark_as_favorite(&mut quotes, quote_index - 1)?;
+            }
+            3 => {
+                // View favorite quotes
+                let favorite_quotes: Vec<&Quote> = quotes.iter().filter(|quote| quote.favorite).collect();
+                if favorite_quotes.is_empty() {
+                    println!("You have no favorite quotes.");
+                } else {
+                    println!("Your favorite quotes are:");
+                    for (i, quote) in favorite_quotes.iter().enumerate() {
+                        println!("{}. {} - {}", i + 1, quote.text, quote.author);
+                    }
                 }
-
-                mark_as_favorite(&mut scraped_data, favorite_index - 1);
-
-                // Save favorites to CSV
-                save_favorites_to_csv(scraped_data.clone(), "favorites.csv")?;
             }
-            "3" => {
-                // Display favorite quotes
-                display_favorite_quotes(&scraped_data);
-            }
-            "4" => {
-                println!("Program ended.");
+            4 => {
+                // Exit the program
+                println!("Thank you for using the web scraper. Goodbye!");
                 break;
             }
             _ => {
-                println!("Invalid option. Please enter a valid option.");
+                // Invalid option
+                println!("Invalid option. Please enter a number between 1 and 4.");
             }
         }
     }
 
-    Ok::<(), Box<dyn Error>>(())
-
+    Ok(())
 }
