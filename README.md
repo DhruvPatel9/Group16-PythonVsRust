@@ -100,3 +100,21 @@ We used massif since it is used for  detailed heap profiling and is also platfor
 ### The following results were obtained for Python:
 
 ![image](https://github.com/DhruvPatel9/Group16-PythonVsRust/assets/101914758/f60584ae-ac6e-402b-96bc-45bc8968c853)
+
+# Scope of Future Work
+### Configurability:
+Make certain parameters configurable, such as the URLs, CSV filenames, or other constants, allowing for easier adaptation to different websites or use cases.
+
+### Handling Dynamic Content:
+If the target websites use JavaScript or have dynamic content loading, consider using tools like Selenium for a more dynamic and comprehensive scraping approach.
+
+### Refactoring for Modularity:
+Consider refactoring the code for increased modularity. Breaking down the functionalities into smaller, focused functions or classes can enhance readability and maintainability.
+
+
+### Caching Mechanism:
+Implement a caching mechanism to store previously scraped data locally. This can reduce the need to re-scrape data on every run, improving efficiency and reducing the load on the web server.
+
+### Automated Testing:
+Introduce automated testing using frameworks such as pytest. This can help ensure the correctness of the code and facilitate future modifications without introducing regressions.
+
