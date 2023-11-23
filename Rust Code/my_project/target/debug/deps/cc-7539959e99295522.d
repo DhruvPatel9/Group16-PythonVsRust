@@ -1,0 +1,10 @@
+/home/kislayranjanneetandon/Downloads/Group16-PythonVsRust/Rust Code/my_project/target/debug/deps/cc-7539959e99295522.rmeta: /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/lib.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe/unix.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/windows_registry.rs
+
+/home/kislayranjanneetandon/Downloads/Group16-PythonVsRust/Rust Code/my_project/target/debug/deps/libcc-7539959e99295522.rlib: /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/lib.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe/unix.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/windows_registry.rs
+
+/home/kislayranjanneetandon/Downloads/Group16-PythonVsRust/Rust Code/my_project/target/debug/deps/cc-7539959e99295522.d: /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/lib.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe/unix.rs /home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/windows_registry.rs
+
+/home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/lib.rs:
+/home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe.rs:
+/home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/os_pipe/unix.rs:
+/home/kislayranjanneetandon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cc-1.0.83/src/windows_registry.rs:
